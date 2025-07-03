@@ -1,0 +1,1 @@
+package co.jp.nakamichi.service;

@@ -1,0 +1,12 @@
+INSERT INTO price(yearmonth,currency,price)VALUES("2025年4月","ドル",250000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2025年5月","ドル",250000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2025年6月","ドル",250000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2025年7月","ドル",250000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2025年8月","ドル",250000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2025年9月","ドル",250000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2025年10月","ドル",200000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2025年11月","ドル",200000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2025年12月","ドル",200000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2026年1月","ドル",200000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2026年2月","ドル",200000);
+INSERT INTO price(yearmonth,currency,price)VALUES("2026年3月","ドル",200000);
