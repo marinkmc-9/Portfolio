@@ -3,11 +3,12 @@ package co.jp.nakamichi.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;//Contractの登録
+import org.springframework.web.bind.annotation.PathVariable;//追加
+import org.springframework.web.bind.annotation.PostMapping;//Contractの登録
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import co.jp.nakamichi.entity.Contract;
+import co.jp.nakamichi.entity.Contract;//Contractの登録
 import co.jp.nakamichi.service.ContractService;
 
 @Controller
@@ -28,22 +29,40 @@ public class ContractController {
         return "contract/list";
     }
 
-    // ----- 追加:ここから -----
-    /** Contract登録画面を表示 */
+    /** Contract登録画面を表示：Contractの登録 */
     @GetMapping("/register")
-    public String getRegister(@ModelAttribute Contract contract) { // ---新規登録
+    public String getRegister(@ModelAttribute Contract contract) {
         // User登録画面に遷移
         return "contract/register";
     }
 
-    /** Contract登録処理 */
+    /** Contract登録処理：Contractの登録 */
     @PostMapping("/register")
-    public String postRegister(Contract contract) { // ---Contract contractに新規登録のデータが登録される。
+    public String postRegister(Contract contract) {
         // Contract登録（Mysqlのテーブルに保存）
         service.saveContract(contract);
         // 一覧画面にリダイレクト
         return "redirect:/contract/list";
     }
-    // ----- 追加:ここまで -----
+
+    // ----- 追加:ここから -----
+    /** Contract更新画面を表示：Contractの更新 */
+    @GetMapping("/update/{id}/")
+    public String getContract(@PathVariable("id") Integer id, Model model) {
+        // Modelに登録
+        model.addAttribute("contract", service.getContract(id));
+        // Contract更新画面に遷移
+        return "contract/update";
+    }
+
+    /** Contract更新処理：Contractの更新 */
+    @PostMapping("/update/{id}/")
+    public String postContract(Contract contract) {
+        // Contract登録
+        service.saveContract(contract);
+        // 一覧画面にリダイレクト
+        return "redirect:/contract/list";
+    }
+    // ----- 追加:ここまで ---
 
 }
