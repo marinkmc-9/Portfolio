@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <title>Portfolio</title>
@@ -8,29 +9,30 @@
 <body>
     <h1>Contract管理システム</h1>
     <h2>Contract一覧(2025年3月～2026年4月まで)</h2>
-    <a th:href="@{/contract/register}">Contractの登録</a>　<!--/*追加：登録画面へのリンク　*/-->
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>年月</th>
-            <th>通貨</th>
-            <th>金額</th>
-           <!-- 追加ここから -->
-            <th>更新</th><!-- 追加：欄のタイトルを追加-->
-            <!-- 追加ここまで -->
-
-        </tr>
-        <tr th:each="contract : ${contractlist}">
-            <td th:text="${contract.id}"></td>
-            <td th:text="${contract.yearmonth}"></td>
-            <td th:text="${contract.currency}"></td>
-            <td th:text="${contract.price}"></td>
-            <!-- 追加ここから -->
-            <td>
-                <a th:href="@{/contract/update/{id}/(id=${contract.id})}">更新</a>   <!-- 追加：更新欄にURLを表示-->
-            </td>
-            <!-- 追加ここまで -->
-        </tr>
-    </table>
+    <!-- 変更ここから -->
+    <form name="frm" method="post" th:action="@{/contract/list}">
+        <a th:href="@{/contract/register}">Contractの登録</a>                                            <!--/* 登録画面へのリンク */-->
+        <input type="submit" name="deleteRun" id="deleteRun" value="(選択)したcontractを一括削除">          <!--/* 追加：一括削除ボタン */-->
+        <table>
+            <tr>
+                <th class="center">(選択)</th>                                                        <!--/* （選択）欄 */-->
+                <th>ID</th>
+                <th>年月</th>
+                <th>通貨</th>
+                <th>金額</th>
+                <th>更新</th>                                                                           <!--/* 欄のタイトルを追加*/-->
+            </tr>
+            <tr th:each="contract : ${contractlist}">
+                <td class="center"><input type="checkbox" name="idck" th:value="${contract.id}"></td>   <!--/* 追加：選択チェックボタン */-->
+                <td th:text="${contract.id}"></td>
+                <td th:text="${contract.yearmonth}"></td>
+                <td th:text="${contract.currency}"></td>
+                <td th:text="${contract.price}"></td>
+                <td><a th:href="@{/contract/update/{id}/(id=${contract.id})}">更新</a></td>              <!--/* 追加：更新欄にURLを表示*/-->
+            </tr>
+        </table>
+    </form>
+    <script th:src="@{/js/contract/list.js}"></script>                                                    <!--/* 追加：js */-->
+       <!-- 変更ここまで -->
 </body>
 </html>
