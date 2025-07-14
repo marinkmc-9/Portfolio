@@ -1,15 +1,17 @@
 package co.jp.nakamichi.controller;
 
-import java.util.Set;//追加
+import java.util.Set;//Contractの削除
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult; // 追加
+import org.springframework.validation.annotation.Validated; // 追加
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;//Contractの登録
 import org.springframework.web.bind.annotation.PathVariable;//Contractの更新
 import org.springframework.web.bind.annotation.PostMapping;//Contractの登録
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;//追加
+import org.springframework.web.bind.annotation.RequestParam;//Contractの削除
 
 import co.jp.nakamichi.entity.Contract;//Contractの登録
 import co.jp.nakamichi.service.ContractService;
@@ -39,14 +41,20 @@ public class ContractController {
         return "contract/register";
     }
 
-    /** Contract登録処理：Contractの登録 */
+    // ----- 変更ここから -----
+    /** Contract登録処理：Contractの登録とエラーがあった場合は登録画面を表示 */
     @PostMapping("/register")
-    public String postRegister(Contract contract) {
+    public String postRegister(@Validated Contract contract, BindingResult res, Model model) {
+        if(res.hasErrors()) {
+            //エラーあった場合、メソッドを呼出して登録画面を表示：チェックリスト
+            return getRegister(contract);
+        }
         // Contract登録（Mysqlのテーブルに保存）
         service.saveContract(contract);
         // 一覧画面にリダイレクト
         return "redirect:/contract/list";
     }
+    // ----- 変更ここまで -----
 
     /** Contract更新画面を表示：Contractの更新 */
     @GetMapping("/update/{id}/")
@@ -66,7 +74,6 @@ public class ContractController {
         return "redirect:/contract/list";
     }
 
-    // ----- 追加:ここから -----
     /** Contract削除処理：Contractの削除 */
     @PostMapping(path="list", params="deleteRun")
     public String deleteRun(@RequestParam(name="idck") Set<Integer> idck, Model model) {
@@ -75,6 +82,5 @@ public class ContractController {
         // 一覧画面にリダイレクト
         return "redirect:/contract/list";
     }
-    // ----- 追加:ここまで -----
 
 }

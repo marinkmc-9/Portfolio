@@ -4,25 +4,31 @@
 <head>
     <meta charset="utf-8">
     <title>Portfolio</title>
-    <link rel="stylesheet" th:href="@{/css/contract/register.css}">　<!--/* 登録画面のcssも変更 */-->
+    <link rel="stylesheet" th:href="@{/css/contract/register.css}"><!--/* 登録画面のcssも変更 */-->
 </head>
 
 <body>
     <h1>Contract管理システム</h1>
     <h2>Contract登録</h2>
-    <form method="post" th:action="@{/contract/register}" th:object="${contract}"> <!--/* 送信ボタンをクリックすると、入力した値は/contract/registerに送信される*/-->
-        <label for="yearmonth">年月</label>                   <!--/* 「年月」を表示　*/-->
-        <input type="text" th:field="*{yearmonth}">          <!--/* 「年月」の入力画面（□）を表示 */-->
+    <form method="post" th:action="@{/contract/register}" th:object="${contract}">          <!--/* 送信ボタンをクリックすると、入力した値は/contract/registerに送信される*/-->
+        <label for="yearmonth">年月</label>                                                  <!--/* 「年月」を表示 */-->
+        <input type="text" th:field="*{yearmonth}" th:errorclass="err">                     <!--/* 「年月」の入力画面（□）を表示とエラーチェック */-->
+        <span th:errors="*{yearmonth}" class="err"></span>                                  <!--/* エラー処理:チェックリスト */-->
         <br>
-        <label for="currency">通貨</label>                    <!--/* 「通貨」を表示　*/-->
-        <input type="text" th:field="*{currency}">           <!--/* 「通貨」の入力画面（□）を表示 */-->
+
+        <label for="currency">通貨</label>                                                   <!--/* 「通貨」を表示 */-->
+        <input type="text" th:field="*{currency}" th:errorclass="err">                      <!--/* 「通貨」の入力画面（□）を表示とエラーチェック */-->
+        <span th:errors="*{currency}" class="err"></span>                                   <!--/* エラー処理：チェックリスト */-->
         <br>
-        <label for="price">金額</label>                       <!--/* 「金額」を表示　*/-->
-        <input type="text" th:field="*{price}">              <!--/* 「金額」の入力画面（□）を表示 */-->
+
+        <label for="price">金額</label>                                                      <!--/* 「金額」を表示 */-->
+        <input type="text" th:field="*{price}" th:errorclass="err">                         <!--/* 「金額」の入力画面（□）を表示とエラーチェック  */-->
+        <span th:errors="*{price}" class="err"></span>                                      <!--/* エラー処理:チェックリスト */-->
         <br>
         <br>
-        <input type="submit" value="登録実行">                <!--/* 「登録実行」ボタン を表示*/-->
-        <a th:href="@{/contract/list}">登録せずに一覧に戻る</a>   <!--/* 「登録せずに一覧に戻る」を表示*/-->
+
+        <input type="submit" value="登録実行">                                                <!--/* 「登録実行」ボタンを表示*/-->
+        <a th:href="@{/contract/list}">登録せずに一覧に戻る</a>                                   <!--/* 「登録せずに一覧に戻る」を表示*/-->
     </form>
 </body>
 </html>
